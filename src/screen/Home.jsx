@@ -1,8 +1,16 @@
 
-import React from 'react'
-import {useNavigate} from "react-router-dom";
+import React, { useState, useEffect }  from 'react'
 
 export default function Home() {
+  const [data, setData] = useState('');
+
+  useEffect(() => {
+    (async function () {
+      const { text } = await( await fetch(`/api/message`)).json();
+      setData(text);
+    })();
+  });
+
   return (
     <div>
     <nav>
@@ -15,6 +23,7 @@ export default function Home() {
         </li>
       </ul>
     </nav>
+    <p>{data}welcome</p>
   </div>
   )
 }
